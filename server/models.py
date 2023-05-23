@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
 
 metadata = MetaData(naming_convention = {
@@ -67,7 +66,7 @@ class BookAtLibrary(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
 
     book_isbn = db.Column(db.Integer, db.ForeignKey('books.isbn'))
-    library_id = db.Column(db.Integer, db.ForiegnKey('libraries.id'))
+    library_id = db.Column(db.Integer, db.ForeignKey('libraries.id'))
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
