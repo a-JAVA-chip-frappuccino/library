@@ -1,7 +1,7 @@
 from app import app
 from models import db, Book, Author, Genre, Library, BookAtLibrary
 
-if __name__ == 'main':
+if __name__ == '__main__':
     with app.app_context():
 
         # clear tables of current data
@@ -54,6 +54,8 @@ if __name__ == 'main':
             )
         ]
 
+        db.session.add_all(seed_books)
+
         # seed authors table
         print("Seeding authors table...")
 
@@ -62,19 +64,19 @@ if __name__ == 'main':
                 id = 1,
                 first_name = 'Lucy Maud',
                 last_name = 'Montgomery',
-                date_of_birth = 1874-11-30
+                date_of_birth = '1874-11-30'
             ),
             Author (
                 id = 2,
                 first_name = 'Miguel',
                 last_name = 'de Cervantes Saavedra',
-                date_of_birth = 1547-09-29
+                date_of_birth = '1547-09-29'
             ),
             Author (
                 id = 3,
                 first_name = 'Koushun',
                 last_name = 'Takami',
-                date_of_birth = 1969-01-10
+                date_of_birth = '1969-01-10'
             ),
             Author (
                 id = 4,
@@ -86,9 +88,11 @@ if __name__ == 'main':
                 id = 5,
                 first_name = 'Sarah',
                 last_name = 'Waters',
-                date_of_birth = 1966-07-21
+                date_of_birth = '1966-07-21'
             )
         ]
+
+        db.session.add_all(seed_authors)
 
         # seed genres table
         print("Seeding genres table...")
@@ -156,6 +160,8 @@ if __name__ == 'main':
             )
         ]
 
+        db.session.add_all(seed_genres)
+
         # seed libraries table
         print("Seeding libraries table...")
 
@@ -185,6 +191,8 @@ if __name__ == 'main':
                 state = 'MA'
             )
         ]
+
+        db.session.add_all(seed_libraries)
 
         # seed book_at_library table
 
@@ -232,3 +240,7 @@ if __name__ == 'main':
                library_id = 1
            )
         ]
+
+        db.session.add_all(seed_book_at_library)
+
+        db.session.commit()

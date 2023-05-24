@@ -29,7 +29,7 @@ class Author(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    date_of_birth = db.Column(db.Date)
+    date_of_birth = db.Column(db.String)
 
     books = db.relationship('Book', backref = 'author')
 
