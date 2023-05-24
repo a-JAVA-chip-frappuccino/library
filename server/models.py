@@ -12,7 +12,7 @@ db = SQLAlchemy(metadata = metadata)
 class Book(db.Model, SerializerMixin):
     __tablename__ = 'books'
 
-    isbn = db.Column(db.Integer, primary_key = True)
+    isbn = db.Column(db.String, primary_key = True)
     title = db.Column(db.String)
     author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
@@ -29,7 +29,7 @@ class Author(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    date_of_birth = db.Column(db.Date)
+    date_of_birth = db.Column(db.String)
 
     books = db.relationship('Book', backref = 'author')
 
