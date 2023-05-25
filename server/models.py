@@ -12,7 +12,7 @@ db = SQLAlchemy(metadata = metadata)
 class Book(db.Model, SerializerMixin):
     __tablename__ = 'books'
 
-    # serialize_rules = ('-libraries.books', '-author_id', '-genre_id')
+    serialize_rules = ('-libraries.books', '-author.books_by_author', '-genre.books_with_genre')
 
     isbn = db.Column(db.String, primary_key = True)
     title = db.Column(db.String)
@@ -30,6 +30,8 @@ class Book(db.Model, SerializerMixin):
 
 class Author(db.Model, SerializerMixin):
     __tablename__ = 'authors'
+
+    serialize_rules = ('-book.author_id')
 
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String)
@@ -62,6 +64,8 @@ class Genre(db.Model, SerializerMixin):
 
 class Library(db.Model, SerializerMixin):
     __tablename__ = 'libraries'
+
+    serialize_rules = ('-books.libraries_with_book')
 
     id = db.Column(db.Integer, primary_key = True)
     branch_name = db.Column(db.String)

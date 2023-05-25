@@ -1,9 +1,7 @@
 from flask import Flask, request, make_response, jsonify
 from flask_migrate import Migrate
 
-# from models import db, Book, Author, Genre, Library, BookAtLibrary
-
-from models import db, Genre
+from models import db, Book, Author, Genre, Library, BookAtLibrary
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -20,54 +18,54 @@ db.init_app(app)
 def home():
     return ""
 
-# @app.route('/books', methods = ['GET', 'POST'])
-# def books():
+@app.route('/books', methods = ['GET', 'POST'])
+def books():
     
-#     if request.method == 'GET':
+    if request.method == 'GET':
     
-#         books = Book.query.all()
+        books = Book.query.all()
 
-#         books_dict = [book.to_dict() for book in books]
+        books_dict = [book.to_dict() for book in books]
 
-#         response = make_response(
+        response = make_response(
 
-#             jsonify(books_dict),
-#             200
-#         )
+            jsonify(books_dict),
+            200
+        )
 
-#     return response
+    return response
 
-# @app.route('/authors', methods = ['GET', 'POST'])
-# def authors():
+@app.route('/authors', methods = ['GET', 'POST'])
+def authors():
     
-#     if request.method == 'GET':
+    if request.method == 'GET':
 
-#         authors = Author.query.all()
+        authors = Author.query.all()
 
-#         authors_dict = [author.to_dict() for author in authors]
+        authors_dict = [author.to_dict() for author in authors]
 
-#         response = make_response(
-#             jsonify(authors_dict),
-#             200
-#         )
+        response = make_response(
+            jsonify(authors_dict),
+            200
+        )
 
-#     return response
+    return response
 
-# @app.route('/libraries', methods = ['GET', 'POST'])
-# def libraries():
+@app.route('/libraries', methods = ['GET', 'POST'])
+def libraries():
 
-#     if request.method == 'GET':
+    if request.method == 'GET':
 
-#         libraries = Library.query.all()
+        libraries = Library.query.all()
 
-#         libraries_dict = [library.to_dict() for library in libraries]
+        libraries_dict = [library.to_dict() for library in libraries]
 
-#         response = make_response(
-#             jsonify(libraries_dict),
-#             200
-#         )
+        response = make_response(
+            jsonify(libraries_dict),
+            200
+        )
 
-#     return response
+    return response
 
 @app.route('/genres', methods = ['GET'])
 def genres():
