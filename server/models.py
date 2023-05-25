@@ -12,16 +12,21 @@ db = SQLAlchemy(metadata = metadata)
 class Book(db.Model, SerializerMixin):
     __tablename__ = 'books'
 
+    # serialize_rules = ('-libraries.books', '-author_id', '-genre_id')
+
     isbn = db.Column(db.String, primary_key = True)
     title = db.Column(db.String)
     author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
     publication_year = db.Column(db.Integer)
 
-    libraries = db.relationship('BookAtLibrary', backref = 'book')
+    libraries_with_book = db.relationship('BookAtLibrary', backref = 'book')
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Author(db.Model, SerializerMixin):
     __tablename__ = 'authors'
@@ -31,21 +36,29 @@ class Author(db.Model, SerializerMixin):
     last_name = db.Column(db.String)
     date_of_birth = db.Column(db.String)
 
-    books = db.relationship('Book', backref = 'author')
+    books_by_author = db.relationship('Book', backref = 'author')
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Genre(db.Model, SerializerMixin):
     __tablename__ = 'genres'
 
+    serialize_rules = ('-books_with_genre')
+
     id = db.Column(db.Integer, primary_key = True)
     genre = db.Column(db.String)
 
-    books = db.relationship('Book', backref = 'genre')
+    books_with_genre = db.relationship('Book', backref = 'genre')
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+    
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Library(db.Model, SerializerMixin):
     __tablename__ = 'libraries'
@@ -55,10 +68,13 @@ class Library(db.Model, SerializerMixin):
     city = db.Column(db.String)
     state = db.Column(db.String)
 
-    books = db.relationship('BookAtLibrary', backref = 'library')
+    books_at_library = db.relationship('BookAtLibrary', backref = 'library')
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class BookAtLibrary(db.Model, SerializerMixin):
     __tablename__ = 'book_at_library'
@@ -70,3 +86,6 @@ class BookAtLibrary(db.Model, SerializerMixin):
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
