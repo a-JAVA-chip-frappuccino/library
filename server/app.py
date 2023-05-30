@@ -1,5 +1,6 @@
 from flask import Flask, request, make_response, jsonify
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 from models import db, Book, Author, Genre, Library, BookAtLibrary
 
@@ -11,6 +12,8 @@ app.json.compact = False
 migrate = Migrate(app, db)
 
 db.init_app(app)
+
+CORS(app)
 
 # server-side routes
 
