@@ -4,7 +4,7 @@ function Home() {
     
     return (
         <>
-            <h1>Home portion of Layout</h1>
+            <h1>Home route is working</h1>
         </>
     )
 }
