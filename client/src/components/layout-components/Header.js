@@ -1,8 +1,11 @@
 import React from "react";
 
+import NavBar from "./NavBar";
+
 function Header() {
+
     return (
-        <div>Header Portion of Layout</div>
+        <NavBar />
     )
 }
 

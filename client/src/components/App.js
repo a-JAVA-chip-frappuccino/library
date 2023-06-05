@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import Layout from "./layout-components/Layout";
+import Home from "./layout-components/Home";
+
 import Libraries from "./content-components/Libraries";
 import Library from "./content-components/Library";
 import Books from "./content-components/Books";
+import Book from "./content-components/Book";
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path = '/' element = { <Layout /> } />
+        <Routes>
+            <Route path = '/' element = { <Home /> } />
                 <Route path = '/libraries'>
                     <Route index element = { <Libraries /> } />
                     <Route path = ':id' element = { <Library /> } />
                 </Route>
-                <Route path = '/books' element = { <Books /> } />
-            </Routes>
-        </BrowserRouter>
+                <Route path = '/books'>
+                    <Route index element = { <Books /> } />
+                    <Route path = ':id' element = { <Book /> } />
+                </Route>
+        </Routes>
     )
 }
 
