@@ -1,6 +1,6 @@
 import React from "react";
 
-function Books() {
+function Books( { books } ) {
     
     return (
         <><h1>books route working</h1></>

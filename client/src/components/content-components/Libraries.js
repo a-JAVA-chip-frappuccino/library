@@ -1,6 +1,6 @@
 import React from "react";
 
-function Libaries() {
+function Libaries( { libraries } ) {
     
     return (
         <><h1>libraries route working</h1></>
