@@ -7,7 +7,6 @@ import Libraries from "./content-components/Libraries";
 import Library from "./content-components/Library";
 import Books from "./content-components/Books";
 import Book from "./content-components/Book";
-import Libaries from "./content-components/Libraries";
 
 function App() {
 
@@ -30,7 +29,7 @@ function App() {
         <Routes>
             <Route path = '/' element = { <Home /> } />
                 <Route path = '/libraries'>
-                    <Route index element = { <Libraries libaries = { libraries } /> } />
+                    <Route index element = { <Libraries libraries = { libraries } /> } />
                     <Route path = ':id' element = { <Library /> } />
                 </Route>
                 <Route path = '/books'>
