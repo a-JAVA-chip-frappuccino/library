@@ -1,9 +1,23 @@
 import React from "react";
 
-function Libaries() {
+import Library from "./Library";
+
+function Libaries( { libraries } ) {
+
+    const mappedLibraries = libraries.map((library) => (
+        <Library
+            key = {library.id}
+            id = {library.id}
+            branch_name = {library.branch_name}
+            city = {library.city}
+            state = {library.state}
+        />
+    ))
     
     return (
-        <><h1>libraries route working</h1></>
+        <ul>
+            {mappedLibraries}
+        </ul>
     )
 }
 

@@ -1,9 +1,12 @@
 import React from "react";
 
-function Library() {
+function Library( { id, branch_name, city, state } ) {
     
     return (
-        <><h1>library route working</h1></>
+        <li>
+            <h2>{branch_name}</h2>
+            <p>{city}, {state}</p>
+        </li>
     )
 }
 

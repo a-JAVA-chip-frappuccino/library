@@ -1,9 +1,14 @@
 import React from "react";
 
-function Book() {
+function Book( { isbn, title, author_id, genre_id, publication_year } ) {
     
     return (
-        <><h1>book route working</h1></>
+        <li>
+            <h2>{title}</h2>
+            <h3>{author_id} TODO: REPLACE WITH DB GRAB</h3>
+            <h3>{genre_id} TODO: REPLACE WITH DB GRAB</h3>
+            <p>{publication_year}</p>
+        </li>
     )
 }
 
