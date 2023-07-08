@@ -1,21 +1,21 @@
-from flask import Flask, request, make_response, jsonify
-from flask_migrate import Migrate
-from flask_cors import CORS
+from flask import request, make_response, jsonify
 
-from models import db, Book, Author, Genre, Library, BookAtLibrary
+from werkzeug.exceptions import NotFound
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+from config import app
 
-migrate = Migrate(app, db)
-
-db.init_app(app)
-
-CORS(app)
+from models import Book, Author, Genre, Library, BookAtLibrary
 
 # server-side routes
+
+@app.errorhandler(NotFound)
+def route_not_found(e):
+    response = make_response(
+        "Oh, dear! The route you are looking for cannot be found!",
+        404
+    )
+    
+    return response
 
 @app.route('/')
 def home():
