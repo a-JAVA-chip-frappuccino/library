@@ -27,6 +27,15 @@ class Book(db.Model, SerializerMixin):
 
     def to_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def __repr__(self):
+        return f'''
+            ISBN: {self.isbn}
+            Title: {self.title}
+            Author ID: {self.author_id}
+            Genre ID: {self.genre_id}
+            Publication Year: {self.publication_year}
+        '''
 
 class Author(db.Model, SerializerMixin):
     __tablename__ = 'authors'
@@ -45,6 +54,12 @@ class Author(db.Model, SerializerMixin):
 
     def to_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def __repr__(self):
+        return f'''
+            Name: {self.first_name} {self.last_name}
+            DOB: {self.date_of_birth}
+        '''
 
 class Genre(db.Model, SerializerMixin):
     __tablename__ = 'genres'
@@ -61,6 +76,11 @@ class Genre(db.Model, SerializerMixin):
     
     def to_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def __repr__(self):
+        return f'''
+            Genre: {self.genre}
+        '''
 
 class Library(db.Model, SerializerMixin):
     __tablename__ = 'libraries'
@@ -79,6 +99,13 @@ class Library(db.Model, SerializerMixin):
 
     def to_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def __repr__(self):
+        return f'''
+            Branch Name: {self.branch_name}
+            City: {self.city}
+            State: {self.state}
+        '''
 
 class BookAtLibrary(db.Model, SerializerMixin):
     __tablename__ = 'book_at_library'
