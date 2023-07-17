@@ -9,8 +9,8 @@ function Books( { books } ) {
             key = {book.isbn}
             isbn = {book.isbn}
             title = {book.title}
-            author_id = {book.author_id}
-            genre_id = {book.genre_id}
+            author_name = {book.author_id}
+            genre = {book.genre_id}
             publication_year = {book.publication_year}
         />
     ))

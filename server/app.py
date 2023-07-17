@@ -28,6 +28,19 @@ def books():
     
         books = Book.query.all()
 
+        for book in books:
+
+            book_author_row = Author.query.filter(Author.id == book.author_id).first()
+
+            book_author = book_author_row.first_name + " " + book_author_row.last_name
+
+            book_genre_row = Genre.query.filter(Genre.id == book.genre_id).first()
+
+            book_genre = book_genre_row.genre
+
+            book.author_id = book_author
+            book.genre_id = book_genre
+
         books_dict = [book.to_dict() for book in books]
 
         response = make_response(
