@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return (
-        <div>Footer Portion of Layout</div>
+        <div>© Me! A work in progress.</div>
     )
 }
 
